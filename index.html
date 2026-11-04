@@ -208,13 +208,44 @@ if (isOnline) {
 }
 
 
+// RANDOM SIMULATED IP GENERATOR
+
+function generateRandomIP() {
+
+    const lastNumber = Math.floor(
+        Math.random() * 254
+    ) + 1;
+
+    return "192.0.2." + lastNumber;
+}
+
+
 // KEYWORD DETECTION
 
 function findResponse(message) {
 
     const text = message.toLowerCase().trim();
 
+    // IP REQUEST DETECTION
+
+    if (
+        text.includes("tell me my ip") ||
+        text.includes("what is my ip") ||
+        text.includes("show me my ip") ||
+        text === "my ip" ||
+        text.includes("find my ip")
+    ) {
+
+        return "IP DETECTED: " + generateRandomIP() +
+               "\n\nNOTICE: SIMULATED IP ADDRESS";
+    }
+
+
+    // NORMAL KEYWORD DETECTION
+
     if (typeof responses !== "undefined") {
+
+        const matches = [];
 
         for (const item of responses) {
 
@@ -223,9 +254,22 @@ function findResponse(message) {
                 const key = keyword.toLowerCase().trim();
 
                 if (key && text.includes(key)) {
-                    return item.reply;
+
+                    matches.push({
+                        keyword: key,
+                        reply: item.reply
+                    });
+
                 }
             }
+        }
+
+        matches.sort(
+            (a, b) => b.keyword.length - a.keyword.length
+        );
+
+        if (matches.length > 0) {
+            return matches[0].reply;
         }
     }
 
