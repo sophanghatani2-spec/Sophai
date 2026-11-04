@@ -61,6 +61,7 @@
             font-size: 14px;
             line-height: 1.5;
             overflow-wrap: anywhere;
+            white-space: pre-wrap;
         }
 
         .user {
@@ -220,28 +221,30 @@ function generateRandomIP() {
 }
 
 
+// IP REQUEST DETECTION
+
+function isIPRequest(message) {
+
+    const text = message.toLowerCase().trim();
+
+    return (
+        text.includes("ip") &&
+        (
+            text.includes("tell") ||
+            text.includes("what") ||
+            text.includes("show") ||
+            text.includes("find") ||
+            text.includes("my")
+        )
+    );
+}
+
+
 // KEYWORD DETECTION
 
 function findResponse(message) {
 
     const text = message.toLowerCase().trim();
-
-    // IP REQUEST DETECTION
-
-    if (
-        text.includes("tell me my ip") ||
-        text.includes("what is my ip") ||
-        text.includes("show me my ip") ||
-        text === "my ip" ||
-        text.includes("find my ip")
-    ) {
-
-        return "IP DETECTED: " + generateRandomIP() +
-               "\n\nNOTICE: SIMULATED IP ADDRESS";
-    }
-
-
-    // NORMAL KEYWORD DETECTION
 
     if (typeof responses !== "undefined") {
 
@@ -334,9 +337,21 @@ function sendMessage() {
         return;
     }
 
-    // NORMAL ONLINE RESPONSE
+    // IP DETECTION HAS PRIORITY OVER ALL KEYWORDS
 
-    const response = findResponse(message);
+    let response;
+
+    if (isIPRequest(message)) {
+
+        response =
+            "IP DETECTED: " + generateRandomIP() +
+            "\n\nNOTICE: SIMULATED IP ADDRESS";
+
+    } else {
+
+        response = findResponse(message);
+
+    }
 
     addMessage("SŌPH-AI", response, "ai");
 }
