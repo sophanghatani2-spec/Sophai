@@ -93,7 +93,7 @@ const responses = [
         reply: "use a calculator man its free"
     },
     {
-        keywords: ["kill myself", "kill", "me", "sucide"],
+        keywords: ["kill myself"],
         reply: "plz dont"
     },
     {
