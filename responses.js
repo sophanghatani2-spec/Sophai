@@ -1,6 +1,10 @@
 
 const responses = [
     {
+        keywords: ["tell me my ip"],
+        reply: "192.0.2.87"
+    },
+    {
         keywords: ["fuck you", "f you"],
         reply: "wow someone's feeling aggressive today 🫩"
     },
