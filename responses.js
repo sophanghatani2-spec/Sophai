@@ -1,6 +1,39 @@
 
 const responses = [
+     {
+    keywords: ["fuck you", "f you"],
+    reply: "wow someone's feeling aggressive today 🫩"
+},
 
+{
+    keywords: ["shut up"],
+    reply: "make me"
+},
+
+{
+    keywords: ["you suck"],
+    reply: "and yet you're still talking to me"
+},
+
+{
+    keywords: ["are you dumb"],
+    reply: "im literally running on keywords bro"
+},
+
+{
+    keywords: ["thank you", "thanks"],
+    reply: "you're welcome i guess"
+},
+
+{
+    keywords: ["good morning"],
+    reply: "morning blud"
+},
+
+{
+    keywords: ["good night"],
+    reply: "gn dont let the wifi bite"
+},
     {
         keywords: ["write", "story"],
         reply: "Nahh man, I am too lazy."
